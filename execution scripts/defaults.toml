@@ -27,6 +27,32 @@
 #       dependency_graph_directory: The directory in which RTEC will store the dependency graph of the event description.
 #       include_input: If true, the dependency graph will include both input and output entities. Otherwise, the graph only includes output entities.
 
+[fraud]
+# Execution Parameters 
+window_size = 5
+step = 5
+start_time = 1
+end_time = 365
+clock_tick = 1
+# Input Specification Parameters
+input_mode = "csv"
+input_providers = ['../examples/fraud/dataset/csv/fraud_data_5_customers.csv']
+stream_rate = 5
+# Knowledge Base
+event_description = '../examples/fraud/resources/patterns/rules.prolog'
+background_knowledge = ['../examples/fraud/dataset/auxiliary/fraud_var_domain.prolog']
+# Output Specification Parameters
+output_mode = "file"
+results_directory = "../examples/fraud/results"
+# Compiler Parameters
+dependency_graph_flag = false
+dependency_graph_directory = '../examples/fraud/resources/graphs'
+include_input = false
+definition_optimisation = false
+
+
+
+
 [toy]
 # Execution Parameters 
 window_size = 50
