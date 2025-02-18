@@ -1,0 +1,15 @@
++0+0+0+1+1+0+1+0+1+0+0+0+0+0+0+0+0+1+0+0+0+1+1+0+0+1+0+1+1+1+1+0+1+0+0+0+0+0+1+0+0+1+0+1+1+1+1+1+1+0+0+0+0+1+1+0+2+1+1+1+0+0+1+1+1+1+0+0+1+0+1+1+1
+
+Recognition Time average (ms)		: 0.4931506849315068
+Recognition Time standard deviation (ms): 0.5266406242942764
+Recognition Time worst (ms)		: 2
+
+Input Entities average			: 99.72602739726027
+Input Entities standard deviation	: 2.32473462307906
+
+Output Entities (average number of fluent-value pairs)	: 0
+Output Entities (standard deviation)	  		: 0.0
+Output Entities (average number of intervals)	: 15.972602739726028
+Output Entities (standard deviation)	  	: 4.206884777019186
+Output Entities (average number of timepoints)	: 15.972602739726028
+Output Entities (standard deviation)	 	: 4.206884777019186

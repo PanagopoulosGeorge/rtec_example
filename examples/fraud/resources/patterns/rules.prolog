@@ -42,3 +42,17 @@ grounding(large_withdrawal(User)) :-
 
 grounding(large_payment(User)) :-
     user(User).
+
+cachingOrder2(User, large_transfer(User)) :-
+    user(User).
+
+cachingOrder2(User, large_deposit(User)) :-
+    user(User).
+
+
+cachingOrder2(User, large_withdrawal(User)) :-
+    user(User).
+
+
+cachingOrder2(User, large_payment(User)) :-
+    user(User).
