@@ -1,4 +1,37 @@
+%-------------- GP - tankers entering natura or fishing ---------------%
+% 1st attempt (using withinArea) FAILED
+% #############################################################################
+    % initiatedAt(withinNaturaOrFishingArea(VesselType, AreaType)=true, T) :- 
+    %     member(AreaType, [natura, fishing]), 
+    %     member(VesselType, [cargo, tanker]),
+    %     vesselType(Vessel, VesselType),
+    %     holdsAt(withinArea(Vessel, AreaType)=true, T).
 
+    % terminatedAt(withinNaturaOrFishingArea(VesselType, AreaType)=true, T) :-
+    %     member(AreaType, [natura, fishing]), 
+    %     member(VesselType, [cargo, tanker]),
+    %     vesselType(Vessel, VesselType),
+    %     happensAt(end(withinArea(Vessel, AreaType)=true), T).
+% #############################################################################
+% REASON FOR FAILURE: initiatedAt MUST always start with happensAt, not holdsAt
+%-------------- GP - tankers entering natura or fishing ---------------%
+initiatedAt(withinNaturaOrFishingArea(VesselType, AreaType)=true, T) :- 
+    happensAt(entersArea(Vessel, Area), T),
+    areaType(Area, AreaType),
+    vesselType(Vessel, VesselType),
+    member(AreaType, [natura, fishing]),
+    member(VesselType, [cargo, tanker]).
+
+terminatedAt(withinNaturaOrFishingArea(VesselType, AreaType)=true, T) :-
+    happensAt(leavesArea(Vessel, Area), T),
+    areaType(Area, AreaType),
+    vesselType(Vessel, VesselType),
+    member(AreaType, [natura, fishing]),
+    member(VesselType, [cargo, tanker]).
+
+terminatedAt(withinNaturaOrFishingArea(VesselType, _)=true, T) :-
+    happensAt(gap_start(Vessel), T),
+    vesselType(Vessel, VesselType).
 %----------------within area -----------------%
 
 initiatedAt(withinArea(Vessel, AreaType)=true, T) :-
@@ -343,6 +376,12 @@ grounding(leavesArea(V,Area)):- vessel(V), areaType(Area).
 grounding(coord(V,_,_)):- vessel(V).
 grounding(velocity(V,_,_,_)):- vessel(V).
 grounding(proximity(Vessel1, Vessel2)=true):- vpair(Vessel1, Vessel2).
+
+%-------------- GP - tankers entering natura or fishing ---------------%
+grounding(vesselType(Vessel, Vtype)) :- vessel(Vessel), vesselStaticInfo(Vessel, Vtype, _).
+grounding(withinNaturaOrFishingArea(VesselType, AreaType)=true) :-
+    vessel(Vessel), areaType(AreaType).
+%-------------- GP - tankers entering natura or fishing ---------------%
 
 % Groundings of output entities
 grounding(gap(Vessel)=PortStatus):-
